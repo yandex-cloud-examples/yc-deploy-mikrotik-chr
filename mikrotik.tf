@@ -74,6 +74,13 @@ resource "yandex_vpc_security_group" "chr_sg" {
     v4_cidr_blocks = tolist(flatten([join("", [var.seed_ip, "/32"]), var.allowed_ip_list]))
   }
 
+  ingress {
+    description    = "winbox"
+    protocol       = "TCP"
+    port           = 8291
+    v4_cidr_blocks = tolist(flatten([join("", [var.seed_ip, "/32"]), var.allowed_ip_list]))
+  }
+
   egress {
     description    = "Permit ANY"
     protocol       = "ANY"
